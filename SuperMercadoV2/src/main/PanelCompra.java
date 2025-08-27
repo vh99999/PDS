@@ -9,7 +9,7 @@ public class PanelCompra extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelCompra() {
+	public PanelCompra(Frame f) {
 
 	}
 

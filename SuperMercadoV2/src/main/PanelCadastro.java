@@ -9,7 +9,7 @@ public class PanelCadastro extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelCadastro() {
+	public PanelCadastro(Frame f) {
 
 	}
 
