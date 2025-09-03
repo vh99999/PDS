@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
 
-	static String url = "jdbc:mysql://localhost:3306/WorkItBr_BD";
+	static String url = "jdbc:mysql://localhost:3306/Supermercado_BD";
 	static String Usuario = "root";
 	static String Senha = "admin";
 
@@ -54,7 +54,7 @@ public class UsuarioDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection conn = DriverManager.getConnection(url, Usuario, Senha);
 
-					String sql = "INSERT INTO Login (Email, Nome, CPF_CNPJ, Telefone, Senha, idContratado) VALUES (?, ?, ?)";
+					String sql = "INSERT INTO Login (Nome, CPF, idAdmin) VALUES (?, ?, ?)";
 					var stmt = conn.prepareStatement(sql);
 
 					stmt.setString(1, u.getUsuario()); // Nome
