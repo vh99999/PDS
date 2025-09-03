@@ -51,5 +51,39 @@ public class ProdutoDAO {
 		}
 
 	}
+	
+	public Usuario getProdutos(String nome, String CPF) {
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn = DriverManager.getConnection(url, Usuario, Senha);
+
+	        String sql = "SELECT * FROM Login WHERE Nome = ? AND CPF = ?";
+	        var stmt = conn.prepareStatement(sql);
+
+	        stmt.setString(1, nome);
+	        stmt.setString(2, CPF);
+
+	        var rs = stmt.executeQuery();
+
+	        if (rs.next()) {
+	            Usuario u = new Usuario(
+	                rs.getString("Nome"),
+	                rs.getString("CPF"),
+	                rs.getBoolean("idAdmin")
+	            );
+	            rs.close();
+	            stmt.close();
+	            conn.close();
+	            return u;
+	        }
+
+	        rs.close();
+	        stmt.close();
+	        conn.close();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	    return null;
+	}
 
 }
