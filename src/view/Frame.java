@@ -1,4 +1,4 @@
-package main;
+package view;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
@@ -56,10 +56,10 @@ public class Frame extends JFrame {
 		contentPane = new JPanel(cardLayout);
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-		panelLogin = new PanelLogin(this);
-		panelCadastro = new PanelCadastro(this);
-		panelCompra = new PanelCompra(this);
-		tcu = new TelaCadastroUsuario(this);
+//		panelLogin = new PanelLogin(this);
+//		panelCadastro = new PanelCadastro(this);
+//		panelCompra = new PanelCompra(this);
+//		tcu = new TelaCadastroUsuario(this);
 
 		contentPane.add(panelLogin, LOGIN_PANEL);
 		contentPane.add(panelCadastro, CAD_PANEL);
@@ -75,4 +75,13 @@ public class Frame extends JFrame {
 		cardLayout.show(contentPane, panelName);
 	}
 
+	public void adicionarTela(String nome, JPanel tela) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
+
+
+
+

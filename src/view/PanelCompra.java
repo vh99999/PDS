@@ -1,4 +1,4 @@
-package main;
+package view;
 
 import java.awt.Dimension;
 
@@ -13,7 +13,7 @@ public class PanelCompra extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelCompra(Frame f) {
+	public PanelCompra() {
 		setPreferredSize(new Dimension(700, 400));
 		setOpaque(false);
 		setLayout(new MigLayout("", "[20][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]", "[20][34.00][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]"));

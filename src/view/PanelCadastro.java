@@ -1,4 +1,4 @@
-package main;
+package view;
 
 import java.awt.Dimension;
 
@@ -19,11 +19,12 @@ public class PanelCadastro extends JPanel {
 	private JTextField tfNome;
 	private JTextField tfPreco;
 	private JTextField tfDesc;
+	private JButton btnCadastro;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelCadastro(Frame f) {
+	public PanelCadastro() {
 		setPreferredSize(new Dimension(700, 400));
 		setOpaque(false);
 		setLayout(new MigLayout("", "[20][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]", "[20][34.00,grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]"));
@@ -60,26 +61,16 @@ public class PanelCadastro extends JPanel {
 		add(scrollPane, "cell 7 1 5 11,grow");
 		
 		
-		JButton btnNewButton = new JButton("Cadastrar Produto\r\n");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ProdutoDAO pDAO = new ProdutoDAO();
-				String nome = tfNome.getText();
-				String preco = tfPreco.getText();
-				String desc = tfDesc.getText();
-				
-				Produto u = new Produto(nome, preco, desc);
-				
-				pDAO.cadastrarProduto(u);
-				
-				tfNome.setText("");
-				tfPreco.setText("");
-				tfDesc.setText("");
-			}
-		});
-		add(btnNewButton, "cell 4 10 3 1,growx");
-
+		btnCadastro = new JButton("Cadastrar Produto\r\n");
+		add(btnCadastro, "cell 4 10 3 1,growx");
+		
 
 	}
-
+	
+	public void cadastrar(ActionListener actionListener) {
+		this.btnCadastro.addActionListener(actionListener);
+	}
+	
+	
+	
 }

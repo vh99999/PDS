@@ -1,36 +1,35 @@
-package main;
+package view;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
 import net.miginfocom.swing.MigLayout;
 
-public class TelaCadastroUsuario extends JPanel {
+
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class PanelLogin extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
 	private JTextField tfNome;
 	private JLabel lblNome;
 	private JLabel lblCPF;
 	private JTextField tfCPF;
-	private JButton btnCadastro;
-	private JRadioButton rdbtnNewRadioButton;
+	private JButton btnLogin;
+	private JButton btnNewButton;
 
 	/**
 	 * Create the panel.
 	 */
-	public TelaCadastroUsuario(Frame f) {
+	public PanelLogin() {
 		setPreferredSize(new Dimension(700, 400));
 		setOpaque(false);
 		setLayout(new MigLayout("", "[20][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]", "[20][34.00][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]"));
@@ -53,28 +52,35 @@ public class TelaCadastroUsuario extends JPanel {
 		add(tfCPF, "cell 4 5 5 1,grow");
 		tfCPF.setColumns(10);
 		
-		rdbtnNewRadioButton = new JRadioButton("Administrador?");
-		rdbtnNewRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		add(rdbtnNewRadioButton, "cell 6 8,grow");
-		
-		btnCadastro = new JButton("Cadastrar");
-		btnCadastro.addActionListener(new ActionListener() {
+		btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String nome = tfNome.getText();
+				String CPF = tfCPF.getText();
 
-			    String usuario = tfNome.getText();
-			    String cpf = tfCPF.getText();
-				
-				UsuarioDAO dao = new UsuarioDAO();
-				Usuario u = new Usuario(usuario, cpf, rdbtnNewRadioButton.isSelected());
+				model.UsuarioDAO dao = new model.UsuarioDAO();
+				model.Usuario u = dao.login(nome, CPF);
 
-				dao.cadastrar(u);
-				
-				tfCPF.setText("");
+				if (u != null) {
+					if (u.isAdmin()) {
+						view.Frame.mostrarTela(view.Frame.CAD_PANEL);
+					} else {
+						view.Frame.mostrarTela(view.Frame.COMP_PANEL);
+					}
+				}
 				tfNome.setText("");
-				// prim.mostrarTela(prim.TRABALHOS_PANEL);
+				tfCPF.setText("");
 			}
 		});
-		add(btnCadastro, "cell 6 10,grow");
+		add(btnLogin, "cell 6 10,grow");
+		
+		btnNewButton = new JButton("Cadastrar-se");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				view.Frame.mostrarTela(view.Frame.TCU_PANEL);
+			}
+		});
+		add(btnNewButton, "cell 6 11,grow");
 		
 		addComponentListener(new ComponentAdapter() {
 			@Override
@@ -86,7 +92,7 @@ public class TelaCadastroUsuario extends JPanel {
 				tfNome.setFont(new Font("Tahoma", Font.PLAIN, fontSize));
 				tfCPF.setFont(new Font("Tahoma", Font.PLAIN, fontSize));
 				lblCPF.setFont(new Font("Tahoma", Font.PLAIN, fontSize));
-				btnCadastro.setFont(new Font("Tahoma", Font.PLAIN, fontSize));
+				btnLogin.setFont(new Font("Tahoma", Font.PLAIN, fontSize));
 			}
 		});
 

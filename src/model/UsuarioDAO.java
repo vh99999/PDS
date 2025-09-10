@@ -1,4 +1,4 @@
-package main;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -37,7 +37,7 @@ public class UsuarioDAO {
 					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso!",
 							JOptionPane.PLAIN_MESSAGE);
 
-					Frame.mostrarTela(Frame.LOGIN_PANEL);
+					view.Frame.mostrarTela(view.Frame.LOGIN_PANEL);
 
 					stmt.close();
 					conn.close();
@@ -65,7 +65,7 @@ public class UsuarioDAO {
 					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso!",
 							JOptionPane.PLAIN_MESSAGE);
 
-					Frame.mostrarTela(Frame.LOGIN_PANEL);
+					view.Frame.mostrarTela(view.Frame.LOGIN_PANEL);
 
 					stmt.close();
 					conn.close();
