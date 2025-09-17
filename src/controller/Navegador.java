@@ -4,10 +4,18 @@ import javax.swing.JPanel;
 
 import view.Frame;
 
+/**
+ * Classe responsável por gerenciar a troca de telas.
+ */
 
 public class Navegador {
 	
 	private Frame frame;
+	
+	/**
+	 * Construtor da classe.
+	 * @param janela Referência ao JFrame.
+	 */
 	
 	public Navegador(Frame frame) {
 		this.frame = frame;

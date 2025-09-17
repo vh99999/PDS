@@ -1,20 +1,20 @@
 package view;
 
-import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
-
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import javax.swing.JRadioButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import controller.Navegador;
+import net.miginfocom.swing.MigLayout;
 
 public class PanelLogin extends JPanel {
 
@@ -53,33 +53,9 @@ public class PanelLogin extends JPanel {
 		tfCPF.setColumns(10);
 		
 		btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String nome = tfNome.getText();
-				String CPF = tfCPF.getText();
-
-				model.UsuarioDAO dao = new model.UsuarioDAO();
-				model.Usuario u = dao.login(nome, CPF);
-
-				if (u != null) {
-					if (u.isAdmin()) {
-						view.Frame.mostrarTela(view.Frame.CAD_PANEL);
-					} else {
-						view.Frame.mostrarTela(view.Frame.COMP_PANEL);
-					}
-				}
-				tfNome.setText("");
-				tfCPF.setText("");
-			}
-		});
 		add(btnLogin, "cell 6 10,grow");
 		
 		btnNewButton = new JButton("Cadastrar-se");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				view.Frame.mostrarTela(view.Frame.TCU_PANEL);
-			}
-		});
 		add(btnNewButton, "cell 6 11,grow");
 		
 		addComponentListener(new ComponentAdapter() {
@@ -93,9 +69,72 @@ public class PanelLogin extends JPanel {
 				tfCPF.setFont(new Font("Tahoma", Font.PLAIN, fontSize));
 				lblCPF.setFont(new Font("Tahoma", Font.PLAIN, fontSize));
 				btnLogin.setFont(new Font("Tahoma", Font.PLAIN, fontSize));
+				btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, fontSize));
 			}
 		});
 
 	}
+	
+	public void login(ActionListener actionListener) {
+		this.btnLogin.addActionListener(actionListener);
+	}
+	
+	public void cadastro(ActionListener actionListener) {
+		this.btnNewButton.addActionListener(actionListener);
+	}
+
+	public JTextField getTfNome() {
+		return tfNome;
+	}
+
+	public void setTfNome(JTextField tfNome) {
+		this.tfNome = tfNome;
+	}
+
+	public JLabel getLblNome() {
+		return lblNome;
+	}
+
+	public void setLblNome(JLabel lblNome) {
+		this.lblNome = lblNome;
+	}
+
+	public JLabel getLblCPF() {
+		return lblCPF;
+	}
+
+	public void setLblCPF(JLabel lblCPF) {
+		this.lblCPF = lblCPF;
+	}
+
+	public JTextField getTfCPF() {
+		return tfCPF;
+	}
+
+	public void setTfCPF(JTextField tfCPF) {
+		this.tfCPF = tfCPF;
+	}
+
+	public JButton getBtnLogin() {
+		return btnLogin;
+	}
+
+	public void setBtnLogin(JButton btnLogin) {
+		this.btnLogin = btnLogin;
+	}
+
+	public JButton getBtnNewButton() {
+		return btnNewButton;
+	}
+
+	public void setBtnNewButton(JButton btnNewButton) {
+		this.btnNewButton = btnNewButton;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 
 }

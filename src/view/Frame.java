@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,74 +11,35 @@ import javax.swing.border.EmptyBorder;
 public class Frame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static JPanel contentPane;
-	private static CardLayout cardLayout;
-	
-	private PanelLogin panelLogin;
-	private PanelCadastro panelCadastro;
-	private PanelCompra panelCompra;
-	private TelaCadastroUsuario tcu;
-
-
-	public static final String LOGIN_PANEL = "Login";
-	public static final String CAD_PANEL = "Cadastro";
-	public static final String COMP_PANEL = "Compra";
-	public static final String TCU_PANEL = "Cad";
-	
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Frame frame = new Frame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JPanel contentPane;
+	private CardLayout cardLayout;
 
 	/**
 	 * Create the frame.
 	 */
 	public Frame() {
+		setPreferredSize(new Dimension(700, 400));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 400);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		
-		cardLayout = new CardLayout();
 
-		contentPane = new JPanel(cardLayout);
-		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		this.cardLayout = new CardLayout();
 
-//		panelLogin = new PanelLogin(this);
-//		panelCadastro = new PanelCadastro(this);
-//		panelCompra = new PanelCompra(this);
-//		tcu = new TelaCadastroUsuario(this);
-
-		contentPane.add(panelLogin, LOGIN_PANEL);
-		contentPane.add(panelCadastro, CAD_PANEL);
-		contentPane.add(panelCompra, COMP_PANEL);;
-		contentPane.add(tcu, TCU_PANEL);;
-
-		setContentPane(contentPane);
-
-		mostrarTela(LOGIN_PANEL);
+		this.contentPane = new JPanel(this.cardLayout);
+		this.contentPane.setPreferredSize(new Dimension(600, 675)); 
+		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(this.contentPane);
 	}
 	
-	public static void mostrarTela(String panelName) {
-		cardLayout.show(contentPane, panelName);
+	public void adicionarTela(String nome, JPanel tela) {
+		this.contentPane.add(tela, nome);
 	}
 
-	public void adicionarTela(String nome, JPanel tela) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * Método responsável por mostrar uma tela (painel) específica.
+	 * @param nome Nome do painel.
+	 */
+	public void mostrarTela(String nome) {
+		this.cardLayout.show(this.contentPane, nome);
+		this.pack();
 	}
 
 }

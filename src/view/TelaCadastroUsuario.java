@@ -63,17 +63,7 @@ public class TelaCadastroUsuario extends JPanel {
 		btnCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-			    String usuario = tfNome.getText();
-			    String cpf = tfCPF.getText();
-				
-				UsuarioDAO dao = new UsuarioDAO();
-				Usuario u = new Usuario(usuario, cpf, rdbtnNewRadioButton.isSelected());
-
-				dao.cadastrar(u);
-				
-				tfCPF.setText("");
-				tfNome.setText("");
-				// prim.mostrarTela(prim.TRABALHOS_PANEL);
+			    
 			}
 		});
 		add(btnCadastro, "cell 6 10,grow");
@@ -93,5 +83,63 @@ public class TelaCadastroUsuario extends JPanel {
 		});
 
 	}
+	
+	public void cadastro(ActionListener actionListener) {
+		this.btnCadastro.addActionListener(actionListener);
+	}
+
+	public JTextField getTfNome() {
+		return tfNome;
+	}
+
+	public void setTfNome(JTextField tfNome) {
+		this.tfNome = tfNome;
+	}
+
+	public JLabel getLblNome() {
+		return lblNome;
+	}
+
+	public void setLblNome(JLabel lblNome) {
+		this.lblNome = lblNome;
+	}
+
+	public JLabel getLblCPF() {
+		return lblCPF;
+	}
+
+	public void setLblCPF(JLabel lblCPF) {
+		this.lblCPF = lblCPF;
+	}
+
+	public JTextField getTfCPF() {
+		return tfCPF;
+	}
+
+	public void setTfCPF(JTextField tfCPF) {
+		this.tfCPF = tfCPF;
+	}
+
+	public JButton getBtnCadastro() {
+		return btnCadastro;
+	}
+
+	public void setBtnCadastro(JButton btnCadastro) {
+		this.btnCadastro = btnCadastro;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton() {
+		return rdbtnNewRadioButton;
+	}
+
+	public void setRdbtnNewRadioButton(JRadioButton rdbtnNewRadioButton) {
+		this.rdbtnNewRadioButton = rdbtnNewRadioButton;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 
 }

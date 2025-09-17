@@ -5,11 +5,15 @@ import java.sql.DriverManager;
 
 import javax.swing.JOptionPane;
 
+import controller.Navegador;
+
 public class UsuarioDAO {
 
 	static String url = "jdbc:mysql://localhost:3306/Supermercado_BD";
 	static String Usuario = "root";
 	static String Senha = "admin";
+	
+	Navegador navegador = new Navegador(null);
 
 	public UsuarioDAO() {
 
@@ -37,7 +41,7 @@ public class UsuarioDAO {
 					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso!",
 							JOptionPane.PLAIN_MESSAGE);
 
-					view.Frame.mostrarTela(view.Frame.LOGIN_PANEL);
+					navegador.navegarPara("LOGIN");
 
 					stmt.close();
 					conn.close();
@@ -65,7 +69,7 @@ public class UsuarioDAO {
 					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso!",
 							JOptionPane.PLAIN_MESSAGE);
 
-					view.Frame.mostrarTela(view.Frame.LOGIN_PANEL);
+					navegador.navegarPara("LOGIN");
 
 					stmt.close();
 					conn.close();
