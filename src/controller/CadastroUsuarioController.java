@@ -27,22 +27,16 @@ public class CadastroUsuarioController {
 			String usuario = view.getTfNome().getText();
 		    String cpf = view.getTfCPF().getText();
 			
-			UsuarioDAO dao = new UsuarioDAO();
 			Usuario u = new Usuario(usuario, cpf, view.getRdbtnNewRadioButton().isSelected());
 
-			dao.cadastrar(u);
+			model.cadastrar(u);
 			
 			view.getTfCPF().setText("");
 			view.getTfNome().setText("");
-			// prim.mostrarTela(prim.TRABALHOS_PANEL);
+			navegador.navegarPara("LOGIN");
 			
 		});
-		
-		
-		
-		
-		
-		
+
 	}
 
 }

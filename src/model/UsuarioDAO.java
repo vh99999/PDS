@@ -12,8 +12,6 @@ public class UsuarioDAO {
 	static String url = "jdbc:mysql://localhost:3306/Supermercado_BD";
 	static String Usuario = "root";
 	static String Senha = "admin";
-	
-	Navegador navegador = new Navegador(null);
 
 	public UsuarioDAO() {
 
@@ -30,18 +28,18 @@ public class UsuarioDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection conn = DriverManager.getConnection(url, Usuario, Senha);
 
-					String sql = "INSERT INTO Login (Nome, CPF, idAdmin) VALUES (?, ?, ?)";
+					String sql = "INSERT INTO Login (Nome, CPF_CNPJ, idAdmin) VALUES (?, ?, ?)";
 					var stmt = conn.prepareStatement(sql);
 
 					stmt.setString(1, u.getUsuario()); // Nome
 					stmt.setString(2, u.getCpfCnpj()); // CPF/CNPJ
-					stmt.setBoolean(3, u.isAdmin()); // contratado
+					stmt.setBoolean(3, u.isAdmin()); // adm
 					
 					stmt.executeUpdate();
 					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso!",
 							JOptionPane.PLAIN_MESSAGE);
 
-					navegador.navegarPara("LOGIN");
+				
 
 					stmt.close();
 					conn.close();
@@ -58,18 +56,18 @@ public class UsuarioDAO {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection conn = DriverManager.getConnection(url, Usuario, Senha);
 
-					String sql = "INSERT INTO Login (Nome, CPF, idAdmin) VALUES (?, ?, ?)";
+					String sql = "INSERT INTO Login (Nome, CPF_CNPJ, idAdmin) VALUES (?, ?, ?)";
 					var stmt = conn.prepareStatement(sql);
 
 					stmt.setString(1, u.getUsuario()); // Nome
 					stmt.setString(2, u.getCpfCnpj()); // CPF/CNPJ
-					stmt.setBoolean(3, u.isAdmin()); // contratado
+					stmt.setBoolean(3, u.isAdmin()); // adm
 
 					stmt.executeUpdate();
 					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso!",
 							JOptionPane.PLAIN_MESSAGE);
 
-					navegador.navegarPara("LOGIN");
+					
 
 					stmt.close();
 					conn.close();
@@ -86,7 +84,7 @@ public class UsuarioDAO {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        Connection conn = DriverManager.getConnection(url, Usuario, Senha);
 
-	        String sql = "SELECT * FROM Login WHERE Nome = ? AND CPF = ?";
+	        String sql = "SELECT * FROM Login WHERE Nome = ? AND CPF_CNPJ = ?";
 	        var stmt = conn.prepareStatement(sql);
 
 	        stmt.setString(1, nome);
@@ -97,7 +95,7 @@ public class UsuarioDAO {
 	        if (rs.next()) {
 	            Usuario u = new Usuario(
 	                rs.getString("Nome"),
-	                rs.getString("CPF"),
+	                rs.getString("CPF_CNPJ"),
 	                rs.getBoolean("idAdmin")
 	            );
 	            rs.close();

@@ -27,6 +27,8 @@ public class ProdutoDAO {
 
 				stmt.setString(1, u.getNome());
 				
+				
+				
 				try {
 					BigDecimal preco = new BigDecimal(u.getPreco().replace(",", ".")); 
 																						
@@ -36,7 +38,8 @@ public class ProdutoDAO {
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				stmt.setString(3, u.getDesc()); // contratado
+				
+				stmt.setString(3, u.getDesc());
 
 				stmt.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!", "Sucesso!",

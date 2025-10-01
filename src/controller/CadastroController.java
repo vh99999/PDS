@@ -1,7 +1,9 @@
 package controller;
 
 
+import model.Produto;
 import model.ProdutoDAO;
+import model.Usuario;
 import view.PanelCadastro;
 ;
 
@@ -22,7 +24,21 @@ public class CadastroController {
 		this.model = model;
 		this.navegador = navegador;
 		
-		
+		this.view.cadastrar(e -> {
+			
+			String nome = view.getTfNome().getText();
+		    String preco = view.getTfPreco().getText();
+		    String Desc = view.getTfDesc().getText();
+			
+			Produto u = new Produto(nome, preco, Desc);
+			
+			view.getTfNome().setText("");
+		    view.getTfPreco().setText("");
+		    view.getTfDesc().setText("");
+			
+			model.cadastrarProduto(u);
+			
+		});
 		
 		
 		

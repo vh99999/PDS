@@ -80,6 +80,31 @@ public class PanelCadastro extends JPanel {
 	public void cadastrar(ActionListener actionListener) {
 		this.btnCadastro.addActionListener(actionListener);
 	}
+
+	public JTextField getTfNome() {
+		return tfNome;
+	}
+
+	public void setTfNome(JTextField tfNome) {
+		this.tfNome = tfNome;
+	}
+
+	public JTextField getTfPreco() {
+		return tfPreco;
+	}
+
+	public void setTfPreco(JTextField tfPreco) {
+		this.tfPreco = tfPreco;
+	}
+
+	public JTextField getTfDesc() {
+		return tfDesc;
+	}
+
+	public void setTfDesc(JTextField tfDesc) {
+		this.tfDesc = tfDesc;
+	}
+	
 	
 	
 	

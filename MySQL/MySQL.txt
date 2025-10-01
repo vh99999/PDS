@@ -11,23 +11,26 @@ CREATE TABLE if not exists Servico
 );
 
 CREATE TABLE if not exists Login 
-( 
- Email VARCHAR(60) NOT NULL DEFAULT '20',  
+(  
  Nome VARCHAR(60) NOT NULL,  
  CPF_CNPJ varchar(60) NOT NULL,  
- Telefone VARCHAR(60) NOT NULL, 
- Senha VARCHAR(60) NOT NULL, 
- github VARCHAR(60),
  idLogin INT PRIMARY KEY AUTO_INCREMENT, 
- idContratado boolean,
- idAdmin boolean,
- idContratante boolean
+ idAdmin boolean
+
 ); 
 
-INSERT INTO login (Nome, Email, CPF_CNPJ, Telefone, Senha, idAdmin)
-SELECT 'Admin', 'default', 'default', 'default', 'workitbr@321', true
+CREATE TABLE if not exists Produtos 
+(  
+ Nome VARCHAR(60) NOT NULL PRIMARY KEY,  
+ preco double NOT NULL,  
+ descricao varchar(300)
+); 
+
+INSERT INTO login (Nome, CPF_CNPJ, idAdmin)
+SELECT 'Admin', 'default', true
 WHERE NOT EXISTS (
 SELECT 1 FROM login WHERE Nome = 'Admin');
 
 
-select * from Login
+select * from Login;
+select * from Produtos
