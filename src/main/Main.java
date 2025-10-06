@@ -20,7 +20,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		try {
-			UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatLightLaf());
+			UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatDarculaLaf());
 		} catch (Exception ex) {
 			System.err.println("Falha ao carregar o tema FlatLaf");
 		}

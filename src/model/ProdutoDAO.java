@@ -3,6 +3,8 @@ package model;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -10,7 +12,7 @@ public class ProdutoDAO {
 
 	static String url = "jdbc:mysql://localhost:3306/Supermercado_BD";
 	static String Usuario = "root";
-	static String Senha = "admin";
+	static String Senha = "root";
 
 	public void cadastrarProduto(Produto u) {
 
@@ -55,7 +57,7 @@ public class ProdutoDAO {
 
 	}
 	
-	public Usuario getProdutos(String nome, String CPF) {
+	public Usuario getProduto(String nome, String CPF) {
 	    try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        Connection conn = DriverManager.getConnection(url, Usuario, Senha);
@@ -88,5 +90,58 @@ public class ProdutoDAO {
 	    }
 	    return null;
 	}
+	
+	public List<Produto> listarProdutos() {
+	    List<Produto> lista = new ArrayList<>();
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn = DriverManager.getConnection(url, Usuario, Senha);
+
+	        String sql = "SELECT * FROM Produtos";
+	        var stmt = conn.prepareStatement(sql);
+	        var rs = stmt.executeQuery();
+
+	        while (rs.next()) {
+	            Produto p = new Produto(
+	                rs.getString("Nome"),
+	                rs.getBigDecimal("preco").toString(),
+	                rs.getString("descricao")
+	            );
+	            lista.add(p);
+	        }
+
+	        rs.close();
+	        stmt.close();
+	        conn.close();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	    return lista;
+	}
+	
+	public void removerProduto(String nome) {
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn = DriverManager.getConnection(url, Usuario, Senha);
+
+	        String sql = "DELETE FROM Produtos WHERE Nome = ?";
+	        var stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, nome);
+
+	        int linhas = stmt.executeUpdate();
+	        if (linhas > 0) {
+	        	JOptionPane.showMessageDialog(null, "Produto removido: " + nome);
+	        }
+
+	        stmt.close();
+	        conn.close();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	}
+
+
+
+
 
 }

@@ -28,12 +28,13 @@ public class CadastroUsuarioController {
 		    String cpf = view.getTfCPF().getText();
 			
 			Usuario u = new Usuario(usuario, cpf, view.getRdbtnNewRadioButton().isSelected());
-
-			model.cadastrar(u);
 			
 			view.getTfCPF().setText("");
 			view.getTfNome().setText("");
-			navegador.navegarPara("LOGIN");
+			
+			if (model.cadastrar(u)) {
+			    navegador.navegarPara("LOGIN");
+			}
 			
 		});
 

@@ -1,7 +1,6 @@
 package controller;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
 
 import model.ProdutoDAO;
 import model.Usuario;
@@ -30,25 +29,32 @@ public class LoginController {
 			String nome = view.getTfNome().getText();
 			String CPF = view.getTfCPF().getText();
 
-			model.UsuarioDAO dao = new model.UsuarioDAO();
-			model.Usuario u = dao.login(nome, CPF);
+			UsuarioDAO dao = new UsuarioDAO();
 
-			if (u != null) {
-				if (u.isAdmin()) {
-					navegador.navegarPara("CADASTRO");
-				} else {
-					navegador.navegarPara("COMPRA");
+			if (nome.trim().equals("") || CPF.trim().equals("")) {
+				JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+				view.getTfCPF().setText("");
+				view.getTfNome().setText("");
+			} else {
+
+				Usuario u = dao.login(nome, CPF);
+
+				if (u != null) {
+					if (u.isAdmin()) {
+						navegador.navegarPara("CADASTRO");
+						
+					} else {
+						navegador.navegarPara("COMPRA");
+					}
 				}
+				view.getTfNome().setText("");
+				view.getTfCPF().setText("");
 			}
-			view.getTfNome().setText("");
-			view.getTfCPF().setText("");
 		});
-		
-		
+
 		this.view.cadastro(e -> {
 			navegador.navegarPara("TELACADASTROUSUARIO");
 		});
-		
 
 	}
 

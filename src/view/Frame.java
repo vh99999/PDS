@@ -18,8 +18,10 @@ public class Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Frame() {
-		setPreferredSize(new Dimension(700, 400));
+		setTitle("Supermercado");
+		setPreferredSize(new Dimension(900, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 
 		this.cardLayout = new CardLayout();
 

@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DecimalFormat;
+
 public class Produto {
 	
 	String nome;
@@ -36,6 +38,18 @@ public class Produto {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+	
+	public String toString() {
+	    try {
+	        double valor = Double.parseDouble(preco);
+	        DecimalFormat df = new DecimalFormat("0.00");
+	        return nome + " - R$" + df.format(valor) + " | " + desc;
+	    } catch (NumberFormatException e) {
+	        return nome + " - R$" + preco + " | " + desc;
+	    }
+	}
+
+
 
 	
 

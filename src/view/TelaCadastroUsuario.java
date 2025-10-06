@@ -60,12 +60,6 @@ public class TelaCadastroUsuario extends JPanel {
 		add(rdbtnNewRadioButton, "cell 6 8,grow");
 		
 		btnCadastro = new JButton("Cadastrar");
-		btnCadastro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			    
-			}
-		});
 		add(btnCadastro, "cell 6 10,grow");
 		
 		addComponentListener(new ComponentAdapter() {

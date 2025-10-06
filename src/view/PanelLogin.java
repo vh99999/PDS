@@ -38,6 +38,7 @@ public class PanelLogin extends JPanel {
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNome.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblNome, "cell 5 2 3 1,grow");
+		lblNome.putClientProperty("JComponent.roundRect", true);
 		
 		tfNome = new JTextField();
 		add(tfNome, "cell 4 3 5 1,grow");
@@ -47,6 +48,7 @@ public class PanelLogin extends JPanel {
 		lblCPF.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(lblCPF, "cell 5 4 3 1,grow");
+		lblCPF.putClientProperty("JComponent.roundRect", true);
 		
 		tfCPF = new JTextField();
 		add(tfCPF, "cell 4 5 5 1,grow");
@@ -54,6 +56,7 @@ public class PanelLogin extends JPanel {
 		
 		btnLogin = new JButton("Login");
 		add(btnLogin, "cell 6 10,grow");
+		btnLogin.putClientProperty("JComponent.roundRect", true);
 		
 		btnNewButton = new JButton("Cadastrar-se");
 		add(btnNewButton, "cell 6 11,grow");
