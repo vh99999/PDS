@@ -22,7 +22,7 @@ CREATE TABLE if not exists Login
 CREATE TABLE if not exists Produtos 
 (  
  Nome VARCHAR(60) NOT NULL PRIMARY KEY,  
- preco double NOT NULL,  
+ preco decimal(10,2) NOT NULL,  
  descricao varchar(300)
 ); 
 
