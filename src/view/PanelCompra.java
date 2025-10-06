@@ -42,7 +42,7 @@ public class PanelCompra extends JPanel {
 		add(scrollCarrinho, "cell 14 2 5 14,grow");
 		
 		JButton btnCarrinho = new JButton("Adicionar ao Carrinho");
-		add(btnCarrinho, "cell 8 10 4 1,grow");
+		add(btnCarrinho, "cell 6 7 8 1,grow");
 		
 		
 
