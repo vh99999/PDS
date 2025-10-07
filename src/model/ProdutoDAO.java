@@ -139,6 +139,35 @@ public class ProdutoDAO {
 	        ex.printStackTrace();
 	    }
 	}
+	
+	public List<Produto> listarProdutosCompra() {
+	    List<Produto> lista = new ArrayList<>();
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn = DriverManager.getConnection(url, Usuario, Senha);
+
+	        String sql = "SELECT * FROM Produtos";
+	        var stmt = conn.prepareStatement(sql);
+	        var rs = stmt.executeQuery();
+
+	        while (rs.next()) {
+	            Produto p = new Produto(
+	                rs.getString("Nome"),
+	                String.valueOf(rs.getDouble("preco")),
+	                rs.getString("descricao")
+	            );
+	            lista.add(p);
+	        }
+
+	        rs.close();
+	        stmt.close();
+	        conn.close();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	    return lista;
+	}
+
 
 
 

@@ -40,7 +40,7 @@ public class Main {
 		CadastroUsuarioController cadastrousuariocontroller = new CadastroUsuarioController(cadastrousuario, usuariodao, navegador);
 		
 		PanelCompra panelcompra = new PanelCompra();
-		CompraController compracontroller = new CompraController();
+		CompraController compracontroller = new CompraController(panelcompra, produtodao, navegador);
 
 		navegador.adicionarPainel("CADASTRO", panelcadastro);
 		navegador.adicionarPainel("LOGIN", panellogin);
