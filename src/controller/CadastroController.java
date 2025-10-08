@@ -1,28 +1,21 @@
 package controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import model.Produto;
 import model.ProdutoDAO;
-import model.Usuario;
-import view.PanelCadastro;;
+import view.PanelCadastro;
 
 public class CadastroController {
 
 	private final PanelCadastro view;
 	private final ProdutoDAO model;
 	private final Navegador navegador;
+	private String nomeOriginalSelecionado = null;
 
-	/**
-	 * 
-	 * 
-	 * @param view
-	 * @param model
-	 * @param navegador
-	 */
 	public CadastroController(PanelCadastro view, ProdutoDAO model, Navegador navegador) {
 		this.view = view;
 		this.model = model;
@@ -30,53 +23,77 @@ public class CadastroController {
 
 		atualizarLista();
 
+		this.view.getListaProdutos().addListSelectionListener(e -> {
+			if (!e.getValueIsAdjusting()) {
+				Produto selecionado = view.getListaProdutos().getSelectedValue();
+				if (selecionado != null) {
+					nomeOriginalSelecionado = selecionado.getNome();
+				} else {
+					nomeOriginalSelecionado = null;
+				}
+			}
+		});
+
 		this.view.cadastrar(e -> {
-
 			String nome = view.getTfNome().getText();
-			String preco = view.getTfPreco().getText();
-			String Desc = view.getTfDesc().getText();
+			String precoStr = view.getTfPreco().getText();
+			String desc = view.getTfDesc().getText();
+			String quantidadeStr = view.getTfQuantidade().getText();
 
-			Produto u = new Produto(nome, preco, Desc);
-
-			if (nome.trim().equals("") || preco.trim().equals("") || Desc.trim().equals("")) {
+			if (nome.trim().isEmpty() || precoStr.trim().isEmpty() || desc.trim().isEmpty()
+					|| quantidadeStr.trim().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
-			} else {
+				return;
+			}
 
+			try {
+				BigDecimal preco = new BigDecimal(precoStr.replace(",", "."));
+				int quantidade = Integer.parseInt(quantidadeStr);
+				Produto p = new Produto(nome, preco, desc, quantidade);
+				if (nomeOriginalSelecionado != null) {
+					model.atualizarProduto(nomeOriginalSelecionado, p);
+					nomeOriginalSelecionado = null;
+				} else {
+					model.cadastrarProduto(p);
+				}
 				view.getTfNome().setText("");
 				view.getTfPreco().setText("");
 				view.getTfDesc().setText("");
-
-				model.cadastrarProduto(u);
+				view.getTfQuantidade().setText("");
 				atualizarLista();
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Preço ou quantidade inválidos. Use apenas números (ex: 10.99)",
+						"Erro", JOptionPane.ERROR_MESSAGE);
 			}
-
 		});
 
-		this.view.remover(e -> {
+		this.view.remover(e -> removerProduto());
 
-			removerProduto();
-
+		this.view.sair(e -> {
+			navegador.setUsuarioAtual(null);
+			navegador.navegarPara("LOGIN");
 		});
-
 	}
 
 	private void atualizarLista() {
-		view.listModel.clear();
+		view.getListModel().clear();
 		List<Produto> produtos = model.listarProdutos();
 		for (Produto p : produtos) {
-			view.listModel.addElement(p.toString());
+			view.getListModel().addElement(p);
 		}
 	}
 
 	private void removerProduto() {
-		String selecionado = view.listaProdutos.getSelectedValue();
+		Produto selecionado = view.getListaProdutos().getSelectedValue();
 		if (selecionado != null) {
-			String nome = selecionado.split(" - ")[0];
-			model.removerProduto(nome);
+			model.removerProduto(selecionado.getNome());
+			view.getTfNome().setText("");
+			view.getTfPreco().setText("");
+			view.getTfDesc().setText("");
+			nomeOriginalSelecionado = null;
 			atualizarLista();
 		} else {
 			JOptionPane.showMessageDialog(null, "Selecione um produto para remover!");
 		}
 	}
-
 }

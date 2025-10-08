@@ -1,59 +1,56 @@
 package model;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Produto {
-	
-	String nome;
-	String preco;
-	String desc;
-	
-	public Produto(String nome, String preco, String desc) {
-		super();
+
+	private String nome;
+	private BigDecimal preco;
+	private String desc;
+	private int quantidade;
+
+	public Produto(String nome, BigDecimal preco, String desc, int quantidade) {
 		this.nome = nome;
 		this.preco = preco;
 		this.desc = desc;
+		this.quantidade = quantidade;
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
-	}
-
-	public void setPreco(String preco) {
-		this.preco = preco;
 	}
 
 	public String getDesc() {
 		return desc;
 	}
 
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
+
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	
-	public String toString() {
-	    try {
-	        double valor = Double.parseDouble(preco);
-	        DecimalFormat df = new DecimalFormat("0.00");
-	        return nome + " - R$" + df.format(valor) + " | " + desc;
-	    } catch (NumberFormatException e) {
-	        return nome + " - R$" + preco + " | " + desc;
-	    }
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 
-
-
-	
-
-	
-	
-
+	@Override
+	public String toString() {
+		return nome + " - R$" + preco.setScale(2, RoundingMode.HALF_UP) + " | " + desc + " | Qtd: " + quantidade;
+	}
 }

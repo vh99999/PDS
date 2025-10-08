@@ -18,7 +18,6 @@ import view.TelaCadastroUsuario;
 public class Main {
 
 	public static void main(String[] args) {
-
 		try {
 			UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatDarculaLaf());
 		} catch (Exception ex) {
@@ -26,31 +25,29 @@ public class Main {
 		}
 
 		Frame frame = new Frame();
-		Navegador navegador = new Navegador(frame);
-		ProdutoDAO produtodao = new ProdutoDAO();
-		UsuarioDAO usuariodao = new UsuarioDAO();
+		PanelCompra panelCompra = new PanelCompra();
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		Navegador navegador = new Navegador(frame, null);
 
-		PanelCadastro panelcadastro = new PanelCadastro();
-		CadastroController cadastrocontroller = new CadastroController(panelcadastro, produtodao, navegador);
+		CompraController compraController = new CompraController(panelCompra, produtoDAO, navegador);
+		navegador.setCompraController(compraController);
 
-		PanelLogin panellogin = new PanelLogin();
-		LoginController logincontroller = new LoginController(panellogin, produtodao, navegador);
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		PanelCadastro panelCadastro = new PanelCadastro();
+		new CadastroController(panelCadastro, produtoDAO, navegador);
+		PanelLogin panelLogin = new PanelLogin();
+		new LoginController(panelLogin, usuarioDAO, navegador);
+		TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario();
+		new CadastroUsuarioController(telaCadastroUsuario, usuarioDAO, navegador);
 
-		TelaCadastroUsuario cadastrousuario = new TelaCadastroUsuario();
-		CadastroUsuarioController cadastrousuariocontroller = new CadastroUsuarioController(cadastrousuario, usuariodao, navegador);
-		
-		PanelCompra panelcompra = new PanelCompra();
-		CompraController compracontroller = new CompraController(panelcompra, produtodao, navegador);
-
-		navegador.adicionarPainel("CADASTRO", panelcadastro);
-		navegador.adicionarPainel("LOGIN", panellogin);
-		navegador.adicionarPainel("TELACADASTROUSUARIO", cadastrousuario);
-		navegador.adicionarPainel("COMPRA", panelcompra);
+		navegador.adicionarPainel("CADASTRO", panelCadastro);
+		navegador.adicionarPainel("LOGIN", panelLogin);
+		navegador.adicionarPainel("TELACADASTROUSUARIO", telaCadastroUsuario);
+		navegador.adicionarPainel("COMPRA", panelCompra);
 
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
 		navegador.navegarPara("LOGIN");
-
 	}
 }

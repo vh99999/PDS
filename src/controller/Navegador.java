@@ -2,47 +2,44 @@ package controller;
 
 import javax.swing.JPanel;
 
+import model.Usuario;
 import view.Frame;
 
-/**
- * Classe responsável por gerenciar a troca de telas.
- */
-
 public class Navegador {
-	
+
 	private Frame frame;
-	
-	/**
-	 * Construtor da classe.
-	 * @param janela Referência ao JFrame.
-	 */
-	
-	public Navegador(Frame frame) {
+	private Usuario usuarioAtual;
+	private CompraController compraController;
+
+	public Navegador(Frame frame, CompraController compraController) {
 		this.frame = frame;
+		this.compraController = compraController;
 	}
 
-	/**
-	 * Método responsável por chamar o método da view que adiciona as telas ao painel principal.
-	 * @param nome Nome do painel.
-	 * @param tela Painel que será adicionado.
-	 */
 	public void adicionarPainel(String nome, JPanel tela) {
 		this.frame.adicionarTela(nome, tela);
 	}
 
-	/**
-	 * Método responsável por chamar o método da view que navega para outra tela.
-	 * @param nome Nome da tela.
-	 */
 	public void navegarPara(String nome) {
+		if ("COMPRA".equals(nome) && compraController != null) {
+			compraController.atualizarListas();
+		}
 		this.frame.mostrarTela(nome);
 	}
 
-	/**
-	 * Método responsável por chamar o método da view que fecha a aplicação.
-	 */
 	public void sair() {
 		this.frame.dispose();
 	}
 
+	public void setUsuarioAtual(Usuario usuario) {
+		this.usuarioAtual = usuario;
+	}
+
+	public Usuario getUsuarioAtual() {
+		return usuarioAtual;
+	}
+
+	public void setCompraController(CompraController compraController) {
+		this.compraController = compraController;
+	}
 }

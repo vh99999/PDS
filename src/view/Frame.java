@@ -2,7 +2,6 @@ package view;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,9 +13,6 @@ public class Frame extends JFrame {
 	private JPanel contentPane;
 	private CardLayout cardLayout;
 
-	/**
-	 * Create the frame.
-	 */
 	public Frame() {
 		setTitle("Supermercado");
 		setPreferredSize(new Dimension(900, 600));
@@ -26,26 +22,17 @@ public class Frame extends JFrame {
 		this.cardLayout = new CardLayout();
 
 		this.contentPane = new JPanel(this.cardLayout);
-		this.contentPane.setPreferredSize(new Dimension(600, 675)); 
+		this.contentPane.setPreferredSize(new Dimension(600, 675));
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this.contentPane);
 	}
-	
+
 	public void adicionarTela(String nome, JPanel tela) {
 		this.contentPane.add(tela, nome);
 	}
 
-	/**
-	 * Método responsável por mostrar uma tela (painel) específica.
-	 * @param nome Nome do painel.
-	 */
 	public void mostrarTela(String nome) {
 		this.cardLayout.show(this.contentPane, nome);
 		this.pack();
 	}
-
 }
-
-
-
-

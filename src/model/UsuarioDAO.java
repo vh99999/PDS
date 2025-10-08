@@ -5,84 +5,42 @@ import java.sql.DriverManager;
 
 import javax.swing.JOptionPane;
 
-import controller.Navegador;
-
 public class UsuarioDAO {
 
 	static String url = "jdbc:mysql://localhost:3306/Supermercado_BD";
 	static String Usuario = "root";
 	static String Senha = "root";
 
-	public UsuarioDAO() {
-
-	}
-
 	public boolean cadastrar(Usuario u) {
-
-		if (u.isAdmin() == true) {
-			if (u.getUsuario().isEmpty() || u.getCpfCnpj().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
-				return false;
-
-			} else {
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection conn = DriverManager.getConnection(url, Usuario, Senha);
-
-					String sql = "INSERT INTO Login (Nome, CPF_CNPJ, idAdmin) VALUES (?, ?, ?)";
-					var stmt = conn.prepareStatement(sql);
-
-					stmt.setString(1, u.getUsuario()); // Nome
-					stmt.setString(2, u.getCpfCnpj()); // CPF/CNPJ
-					stmt.setBoolean(3, u.isAdmin()); // adm
-
-					stmt.executeUpdate();
-					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso!",
-							JOptionPane.PLAIN_MESSAGE);
-
-					stmt.close();
-					conn.close();
-					return true;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					return false;
-				}
-			}
-		} else {
-			if (u.getUsuario().isEmpty() || u.getCpfCnpj().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
-				return false;
-
-			} else {
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection conn = DriverManager.getConnection(url, Usuario, Senha);
-
-					String sql = "INSERT INTO Login (Nome, CPF_CNPJ, idAdmin) VALUES (?, ?, ?)";
-					var stmt = conn.prepareStatement(sql);
-
-					stmt.setString(1, u.getUsuario()); // Nome
-					stmt.setString(2, u.getCpfCnpj()); // CPF/CNPJ
-					stmt.setBoolean(3, u.isAdmin()); // adm
-
-					stmt.executeUpdate();
-					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso!",
-							JOptionPane.PLAIN_MESSAGE);
-
-					stmt.close();
-					conn.close();
-					return true;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					return false;
-				}
-			}
+		if (u.getUsuario().isEmpty() || u.getCpfCnpj().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(url, Usuario, Senha);
 
+			String sql = "INSERT INTO Login (Nome, CPF_CNPJ, idAdmin) VALUES (?, ?, ?)";
+			var stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, u.getUsuario());
+			stmt.setString(2, u.getCpfCnpj());
+			stmt.setBoolean(3, u.isAdmin());
+
+			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso!",
+					JOptionPane.PLAIN_MESSAGE);
+
+			stmt.close();
+			conn.close();
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 
-	public Usuario login(String nome, String CPF) {
-
+	public Usuario login(String nome, String cpfCnpj) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(url, Usuario, Senha);
@@ -91,7 +49,7 @@ public class UsuarioDAO {
 			var stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, nome);
-			stmt.setString(2, CPF);
+			stmt.setString(2, cpfCnpj);
 
 			var rs = stmt.executeQuery();
 
