@@ -29,34 +29,32 @@ public class TelaCadastroUsuario extends JPanel {
 	public TelaCadastroUsuario() {
 		setPreferredSize(new Dimension(700, 400));
 		setOpaque(false);
-		setLayout(new MigLayout("fill, insets 5",
-				"[20][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]",
-				"[20][34.00][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]"));
+		setLayout(new MigLayout("fill, insets 5", "[grow][grow][grow]", "[grow][grow][grow][grow]"));
 
 		lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNome.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblNome, "cell 5 2 3 1,grow");
+		add(lblNome, "flowy,cell 1 0,grow");
 
 		tfNome = new JTextField();
-		add(tfNome, "cell 4 3 5 1,grow");
+		add(tfNome, "cell 1 0,growx");
 		tfNome.setColumns(10);
 
 		lblCPF = new JLabel("CPF");
 		lblCPF.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		add(lblCPF, "cell 5 4 3 1,grow");
+		add(lblCPF, "flowy,cell 1 1,grow");
 
 		tfCPF = new JTextField();
-		add(tfCPF, "cell 4 5 5 1,grow");
+		add(tfCPF, "cell 1 1,growx");
 		tfCPF.setColumns(10);
 
 		rdbtnNewRadioButton = new JRadioButton("Administrador?");
 		rdbtnNewRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		add(rdbtnNewRadioButton, "cell 6 8,grow");
+		add(rdbtnNewRadioButton, "flowy,cell 1 2,grow");
 
 		btnCadastro = new JButton("Cadastrar");
-		add(btnCadastro, "cell 6 10,grow");
+		add(btnCadastro, "cell 1 2,growx");
 
 		addComponentListener(new ComponentAdapter() {
 			@Override

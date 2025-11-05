@@ -11,7 +11,7 @@ public class ProdutoDAO {
 
 	static String url = "jdbc:mysql://localhost:3306/Supermercado_BD";
 	static String Usuario = "root";
-	static String Senha = "root";
+	static String Senha = "admin";
 
 	public void cadastrarProduto(Produto p) {
 		if (p.getNome() == null || p.getNome().isEmpty() || p.getPreco() == null) {

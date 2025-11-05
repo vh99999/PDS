@@ -9,7 +9,7 @@ public class UsuarioDAO {
 
 	static String url = "jdbc:mysql://localhost:3306/Supermercado_BD";
 	static String Usuario = "root";
-	static String Senha = "root";
+	static String Senha = "admin";
 
 	public boolean cadastrar(Usuario u) {
 		if (u.getUsuario().isEmpty() || u.getCpfCnpj().isEmpty()) {

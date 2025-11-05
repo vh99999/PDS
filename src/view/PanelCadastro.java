@@ -39,48 +39,53 @@ public class PanelCadastro extends JPanel {
 
 	public PanelCadastro() {
 		setPreferredSize(new Dimension(700, 400));
-		setLayout(new MigLayout("fill, insets 15",
-				"[20][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]",
-				"[20][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]"));
+		setLayout(new MigLayout("fill, insets 15", "[grow][grow 20][grow]", "[grow][grow][grow][grow][grow]"));
 
 		listModel = new DefaultListModel<>();
 
-		btnSair = new JButton("Log out");
-		add(btnSair, "cell 6 0");
-
 		JPanel Carrinho = new JPanel();
-		add(Carrinho, "cell 0 1 4 11,push,grow");
-		Carrinho.setLayout(new MigLayout("", "[grow]", "[grow][grow]"));
+		add(Carrinho, "cell 0 1 1 3,push,grow");
+		Carrinho.setLayout(new MigLayout("fill, insets 5 5 5 5", "[grow]", "[grow][grow][grow]"));
 		Carrinho.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		tfNome = new JTextField();
-		Carrinho.add(tfNome, "cell 0 0 8 1,push,growx");
+		Carrinho.add(tfNome, "cell 0 0,push,growx");
 		tfNome.setColumns(10);
 		tfNome.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "NOME DO PRODUTO");
 		tfNome.putClientProperty("JComponent.roundRect", true);
 
 		tfPreco = new JTextField();
-		Carrinho.add(tfPreco, "cell 0 2 8 1,push,growx");
+		Carrinho.add(tfPreco, "cell 0 1,push,growx");
 		tfPreco.setColumns(10);
 		tfPreco.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "PREÇO DO PRODUTO");
 		tfPreco.putClientProperty("JComponent.roundRect", true);
 
 		TfQuantidade = new JTextField();
-		Carrinho.add(TfQuantidade, "cell 0 4 8 1,growx");
+		Carrinho.add(TfQuantidade, "cell 0 2,growx");
 		TfQuantidade.setColumns(10);
 		TfQuantidade.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "QUANTIDADE");
 
 		tfDesc = new JTextField();
 		tfDesc.setHorizontalAlignment(SwingConstants.LEFT);
-		Carrinho.add(tfDesc, "cell 0 6 8 2,push,growx");
+		Carrinho.add(tfDesc, "cell 0 3,push,growx");
 		tfDesc.setColumns(10);
 		tfDesc.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "DESCRIÇÃO");
 		tfDesc.putClientProperty("JComponent.roundRect", true);
 
+		btnSair = new JButton("Log out");
+		add(btnSair, "cell 0 0 3 1,alignx center");
+
 		JScrollPane scrollProdutosCadastrados = new JScrollPane();
-		add(scrollProdutosCadastrados, "cell 6 1 6 11,push,grow");
+		add(scrollProdutosCadastrados, "cell 2 1 1 3,push,grow");
 		listaProdutos = new JList<>(listModel);
 		scrollProdutosCadastrados.setViewportView(listaProdutos);
+
+		btnCadastro = new JButton("Cadastrar Produto");
+		add(btnCadastro, "flowy,cell 1 2,push,alignx center");
+		btnCadastro.putClientProperty("JComponent.roundRect", true);
+
+		btnRemover = new JButton("Remover produto");
+		add(btnRemover, "cell 1 2,push,alignx center");
 
 		listaProdutos.addListSelectionListener(new ListSelectionListener() {
 			@Override
@@ -96,13 +101,6 @@ public class PanelCadastro extends JPanel {
 				}
 			}
 		});
-
-		btnCadastro = new JButton("Cadastrar Produto");
-		add(btnCadastro, "cell 4 6 2 1,push,grow");
-		btnCadastro.putClientProperty("JComponent.roundRect", true);
-
-		btnRemover = new JButton("Remover produto");
-		add(btnRemover, "cell 4 8 2 1,push,grow");
 
 		addComponentListener(new ComponentAdapter() {
 			@Override

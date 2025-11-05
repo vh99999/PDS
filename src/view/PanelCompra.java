@@ -37,34 +37,33 @@ public class PanelCompra extends JPanel {
 		setPreferredSize(new Dimension(700, 400));
 		setOpaque(false);
 
-		setLayout(new MigLayout("fill, insets 5",
-				"[grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow]",
-				"[grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow]"));
+		setLayout(new MigLayout("fill, insets 20 20 20 20", "[grow][grow][grow][grow][grow]",
+				"[grow][grow][grow][grow][grow]"));
 
 		carrinhoModel = new DefaultListModel<>();
 
 		btnSair = new JButton("Log out");
-		add(btnSair, "cell 6 0,growx");
+		add(btnSair, "cell 0 0 5 1,alignx center");
 		listaCarrinho = new JList<>(carrinhoModel);
 		JScrollPane scrollCarrinho = new JScrollPane(listaCarrinho);
-		add(scrollCarrinho, "cell 1 2 4 11,grow");
+		add(scrollCarrinho, "cell 0 1 2 3,grow");
 
 		estoqueModel = new DefaultListModel<>();
 		listaEstoque = new JList<>(estoqueModel);
 		JScrollPane scrollEstoque = new JScrollPane(listaEstoque);
-		add(scrollEstoque, "cell 8 2 4 11,grow");
+		add(scrollEstoque, "cell 3 1 2 3,grow");
 
 		btnAdicionar = new JButton("Adicionar ao Carrinho");
-		add(btnAdicionar, "cell 5 6 3 1,grow");
+		add(btnAdicionar, "flowy,cell 2 2,grow");
 
 		btnRemover = new JButton("Remover do Carrinho");
-		add(btnRemover, "cell 5 8 3 1,grow");
-
-		btnFinalizar = new JButton("Finalizar Compra");
-		add(btnFinalizar, "cell 5 10 3 1,grow");
+		add(btnRemover, "cell 2 2,grow");
 
 		lblTotal = new JLabel("Total: R$0.00");
-		add(lblTotal, "cell 2 13,grow");
+		add(lblTotal, "cell 0 4,growx");
+
+		btnFinalizar = new JButton("Finalizar Compra");
+		add(btnFinalizar, "cell 2 2,grow");
 
 		addComponentListener(new ComponentAdapter() {
 			@Override

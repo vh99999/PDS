@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.ActionEvent;
 
 public class PanelLogin extends JPanel {
 
@@ -27,36 +28,40 @@ public class PanelLogin extends JPanel {
 	public PanelLogin() {
 		setPreferredSize(new Dimension(700, 400));
 		setOpaque(false);
-		setLayout(new MigLayout("fill, insets 5",
-				"[20][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][20]",
-				"[20][34.00][grow][grow][grow][grow][grow][grow][grow][][grow][grow][grow][20]"));
+		setLayout(new MigLayout("fill", "50[grow][grow][grow]50", "[grow 40][grow 30][grow 20]"));
 
 		lblNome = new JLabel("Nome");
+		lblNome.setVerticalAlignment(SwingConstants.TOP);
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNome.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblNome, "cell 5 2 3 1,grow");
+		add(lblNome, "flowx,cell 1 0,grow");
 		lblNome.putClientProperty("JComponent.roundRect", true);
 
 		tfNome = new JTextField();
-		add(tfNome, "cell 4 3 5 1,grow");
+		add(tfNome, "cell 0 0 3 1,growx");
 		tfNome.setColumns(10);
 
 		lblCPF = new JLabel("CPF");
+		lblCPF.setVerticalAlignment(SwingConstants.TOP);
 		lblCPF.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		add(lblCPF, "cell 5 4 3 1,grow");
+		add(lblCPF, "flowy,cell 1 1,grow");
 		lblCPF.putClientProperty("JComponent.roundRect", true);
 
 		tfCPF = new JTextField();
-		add(tfCPF, "cell 4 5 5 1,grow");
+		add(tfCPF, "cell 0 1 3 1,growx");
 		tfCPF.setColumns(10);
 
-		btnLogin = new JButton("Login");
-		add(btnLogin, "cell 6 10,grow");
-		btnLogin.putClientProperty("JComponent.roundRect", true);
-
 		btnNewButton = new JButton("Cadastrar-se");
-		add(btnNewButton, "cell 6 11,grow");
+		add(btnNewButton, "flowy,cell 1 2,growx");
+
+		btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		add(btnLogin, "cell 1 2,growx,aligny bottom");
+		btnLogin.putClientProperty("JComponent.roundRect", true);
 
 		addComponentListener(new ComponentAdapter() {
 			@Override
