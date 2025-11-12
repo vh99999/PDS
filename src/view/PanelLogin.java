@@ -28,7 +28,7 @@ public class PanelLogin extends JPanel {
 	public PanelLogin() {
 		setPreferredSize(new Dimension(700, 400));
 		setOpaque(false);
-		setLayout(new MigLayout("fill", "50[grow][grow][grow]50", "[grow 40][grow 30][grow 20]"));
+		setLayout(new MigLayout("fill, insets 50 20 20 20", "50[grow][grow][grow]50", "[grow 40][grow 30][grow 20]"));
 
 		lblNome = new JLabel("Nome");
 		lblNome.setVerticalAlignment(SwingConstants.TOP);

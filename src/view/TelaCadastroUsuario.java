@@ -29,7 +29,7 @@ public class TelaCadastroUsuario extends JPanel {
 	public TelaCadastroUsuario() {
 		setPreferredSize(new Dimension(700, 400));
 		setOpaque(false);
-		setLayout(new MigLayout("fill, insets 5", "[grow][grow][grow]", "[grow][grow][grow][grow]"));
+		setLayout(new MigLayout("fill, insets 50 20 20 20", "[grow][grow][grow]", "[grow][grow][grow][grow]"));
 
 		lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));

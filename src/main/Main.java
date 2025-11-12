@@ -45,7 +45,6 @@ public class Main {
 		navegador.adicionarPainel("TELACADASTROUSUARIO", telaCadastroUsuario);
 		navegador.adicionarPainel("COMPRA", panelCompra);
 
-		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
 		navegador.navegarPara("LOGIN");

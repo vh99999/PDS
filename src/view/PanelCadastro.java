@@ -45,7 +45,7 @@ public class PanelCadastro extends JPanel {
 
 		JPanel Carrinho = new JPanel();
 		add(Carrinho, "cell 0 1 1 3,push,grow");
-		Carrinho.setLayout(new MigLayout("fill, insets 5 5 5 5", "[grow]", "[grow][grow][grow]"));
+		Carrinho.setLayout(new MigLayout("fill, insets 20 20 20 20", "[grow]", "[grow][grow][grow]"));
 		Carrinho.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		tfNome = new JTextField();
