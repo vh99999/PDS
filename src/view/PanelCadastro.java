@@ -64,6 +64,7 @@ public class PanelCadastro extends JPanel {
 		Carrinho.add(TfQuantidade, "cell 0 2,growx");
 		TfQuantidade.setColumns(10);
 		TfQuantidade.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "QUANTIDADE");
+		TfQuantidade.putClientProperty("JComponent.roundRect", true);
 
 		tfDesc = new JTextField();
 		tfDesc.setHorizontalAlignment(SwingConstants.LEFT);
